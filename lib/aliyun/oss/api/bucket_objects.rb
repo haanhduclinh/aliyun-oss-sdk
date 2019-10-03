@@ -217,6 +217,17 @@ module Aliyun
           headers = { 'x-oss-object-acl' => acl }
           http.put("/#{key}", query: query, headers: headers, bucket: bucket, key: key)
         end
+
+        # set headers for object
+        # headers = {
+        #   "x-oss-metadata-directive" => "REPLACE",
+        #   "content-type" => MIME::Types.type_for(filename).first.content_type,
+        #   "content-disposition" => "attachment; filename=\"filename\""
+        # }
+
+        def bucket_set_object_headers(key, headers)
+          http.put("/#{key}", headers: headers, bucket: bucket, key: key)
+        end
       end
     end
   end
